@@ -44,7 +44,8 @@ export default defineComponent({
   name: "Formulário",
   data() {
     return {
-        tempoEmSegundos: 0
+        tempoEmSegundos: 0,
+        cronometro: 0
     };
   },
   computed: {
@@ -56,13 +57,13 @@ export default defineComponent({
     iniciar() {
         // começar contagem
         // 1 seg = 1000 milisegundos
-      setInterval(() => {
+      this.cronometro = setInterval(() => {
         this.tempoEmSegundos += 1;
       }, 1000);
     },
     finalizar() {
         // finalizar contagem
-        this.tempoEmSegundos = 0;
+        clearInterval(this.cronometro);
     },
   },
 });
