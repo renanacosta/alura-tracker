@@ -33,3 +33,9 @@ https://bulma.io/documentation/overview/start/
 npm i --save-dev @fortawesome/fontawesome-free
 ```
 https://www.npmjs.com/package/@fortawesome/fontawesome-free
+
+<!-- Na versão 2.0 do sistema foi instalado os seguintes itens -->
+
+<!-- - Vue Router: Gerenciador de rotas
+npm i vue-router@4
+```
