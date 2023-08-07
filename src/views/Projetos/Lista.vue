@@ -4,14 +4,16 @@
       <span class="icon is-small">
         <i class="fas fa-plus"></i>
       </span>
-      <span>Novo Projeto</span>
-    </router-link>
+      <span>Novo projeto</span>
+    </router-link> 
     <table class="table is-fullwidth">
       <thead>
         <tr>
           <th>ID</th>
           <th>Nome</th>
-          <th>Ações</th>
+          <th>
+            Ações
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -23,13 +25,11 @@
               <span class="icon is-small">
                 <i class="fas fa-pencil-alt"></i>
               </span>
-              <span>Editar</span>
             </router-link>
-            <button class="button m1-2 is-danger" @click="excluir(projeto.id)">
+            <button class="button ml-2 is-danger" @click="excluir(projeto.id)">
               <span class="icon is-small">
                 <i class="fas fa-trash"></i>
               </span>
-              <span>Excluir</span>
             </button>
           </td>
         </tr>
@@ -40,23 +40,22 @@
 
 <script lang="ts">
 import { useStore } from "@/store";
-import { EXCLUIR_PROJETO } from "@/store/tipo-mutacoes";
 import { computed, defineComponent } from "vue";
+import { EXCLUIR_PROJETO } from '@/store/tipo-mutacoes'
 
 export default defineComponent({
   name: "Lista",
   methods: {
-    excluir(id: string) {
-      this.store.commit(EXCLUIR_PROJETO, id);
-    },
+    excluir (id: string) {
+      this.store.commit(EXCLUIR_PROJETO, id)
+    }
   },
-
-  setup() {
-    const store = useStore();
+  setup () {
+    const store = useStore()
     return {
       projetos: computed(() => store.state.projetos),
-      store,
-    };
-  },
+      store
+    }
+  }
 });
 </script>

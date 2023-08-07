@@ -7,7 +7,7 @@
           type="text"
           class="input"
           v-model="nomeDoProjeto"
-          id="nomeDoProjeto"
+          id="nomeDoProjet"
         />
       </div>
       <div class="field">
@@ -18,34 +18,30 @@
 </template>
 
 <script lang="ts">
-import { TipoNotificacao } from "@/interfaces/INotificacao";
 import { useStore } from "@/store";
-import {
-  ADICIONA_PROJETO,
-  ALTERA_PROJETO
-} from "@/store/tipo-mutacoes";
 import { defineComponent } from "vue";
-import { notificacaoMixin } from "@/mixins/notificar";
+
+import { ALTERA_PROJETO, ADICIONA_PROJETO } from '@/store/tipo-mutacoes'
+import { TipoNotificacao } from "@/interfaces/INotificacao";
+
+import useNotificador from '@/hooks/notificador'
 
 export default defineComponent({
   name: "Formulario",
   props: {
     id: {
-      type: String,
-    },
+      type: String
+    }
   },
-  mixins: [notificacaoMixin],
-  mounted() {
-    if (this.id) {
-      const projeto = this.store.state.projetos.find(
-        (projeto) => projeto.id === this.id
-      );
-      this.nomeDoProjeto = projeto?.nome || "";
+  mounted () {
+    if(this.id) {
+      const projeto = this.store.state.projetos.find(proj => proj.id == this.id)
+      this.nomeDoProjeto = projeto?.nome || ''
     }
   },
   data() {
     return {
-      nomeDoProjeto: "",
+      nomeDoProjeto: ""
     };
   },
   methods: {
@@ -53,22 +49,24 @@ export default defineComponent({
       if (this.id) {
         this.store.commit(ALTERA_PROJETO, {
           id: this.id,
-          nome: this.nomeDoProjeto,
-        });
+          nome: this.nomeDoProjeto
+        })
       } else {
-        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
+        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto)
       }
+
       this.nomeDoProjeto = "";
-  this.notificar(TipoNotificacao.SUCESSO, "Excelente!", "O projeto foi cadastrado com sucesso!")
-      this.$router.push("/projetos");
-    },
-    
+      this.notificar(TipoNotificacao.SUCESSO, 'Excelente!', 'O projeto foi cadastrado com sucesso!')
+      this.$router.push('/projetos')
+    }
   },
-  setup() {
-    const store = useStore();
+  setup () {
+    const store = useStore()
+    const { notificar } = useNotificador()
     return {
       store,
-    };
-  },
+      notificar
+    }
+  }
 });
 </script>

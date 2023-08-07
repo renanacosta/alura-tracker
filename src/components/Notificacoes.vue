@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <div class="notificacoes">
-      <article
-        class="message"
-        :class="contexto[notificacao.tipo]"
-        v-for="notificacao in notificacoes"
-        :key="notificacao.id"
-      >
-        <div class="message-header">{{ notificacao.titulo }}</div>
-        <div class="message-body">
-          {{ notificacao.texto }}
-        </div>
-      </article>
-    </div>
+  <div class="notificacoes">
+    <article
+      class="message"
+      :class="contexto[notificacao.tipo]"
+      v-for="notificacao in notificacoes"
+      :key="notificacao.id"
+    >
+      <div class="message-header">{{ notificacao.titulo }}</div>
+      <div class="message-body">
+        {{ notificacao.texto }}
+      </div>
+    </article>
   </div>
 </template>
 
@@ -25,11 +23,11 @@ export default defineComponent({
   name: "Notificacoes",
   data() {
     return {
-        contexto: {
-            [TipoNotificacao.SUCESSO]: 'is-success',
-            [TipoNotificacao.ATENCAO]: 'is-warning',
-            [TipoNotificacao.FALHA]: 'is-danger',
-        }
+      contexto: {
+        [TipoNotificacao.SUCESSO]: "is-success",
+        [TipoNotificacao.ATENCAO]: "is-warning",
+        [TipoNotificacao.FALHA]: "is-danger",
+      },
     };
   },
   setup() {
