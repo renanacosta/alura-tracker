@@ -44,3 +44,17 @@ npm i vue-router@4
 ```
 npm i vuex@next
 ```
+
+- Como simulador de Back-End foi utilizado o json-server
+```
+npm i -g json-server
+```
+- Para rodar o json-server
+```
+json-server --watch db.json
+```
+
+- Axios: Cliente HTTP
+```
+npm i axios
+```
