@@ -1,11 +1,11 @@
 <template>
   <header>
-    <h1 class="image">
-      <img src="../assets/logo.png" alt="Logo" />
+    <h1>
+      <img alt="Alura Tracker" src="../assets/logo.png" />
     </h1>
     <div class="has-text-centered">
-      <button class="button" @click="alterarTema">
-        {{ textoBotao }}
+      <button class="button" @click="alterarModo">
+        Ativar modo {{ textoBtn }}
       </button>
     </div>
     <nav class="panel mt-5">
@@ -25,7 +25,7 @@
       </ul>
     </nav>
     <div class="author">
-    <p>By Renan Acosta</p>
+      <p>Desenvolvido por Renan Acosta</p>
     </div>
   </header>
 </template>
@@ -35,64 +35,61 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "BarraLateral",
-  emits: ["aoTemaAlterado"],
+  emits: ["aoAlterarModo"],
   data() {
     return {
-      modoEscuroAtivo: false,
+      modoEscuro: false,
     };
   },
-  computed: {
-    textoBotao() {
-      if (this.modoEscuroAtivo) {
-        return "Desativar modo escuro";
-      } else {
-        return "Ativar modo escuro";
-      }
+  methods: {
+    alterarModo(): void {
+      this.modoEscuro = !this.modoEscuro;
+      this.$emit("aoAlterarModo", this.modoEscuro);
     },
   },
-  methods: {
-    alterarTema() {
-      this.modoEscuroAtivo = !this.modoEscuroAtivo;
-      this.$emit("aoTemaAlterado", this.modoEscuroAtivo);
+  computed: {
+    textoBtn(): string {
+      return this.modoEscuro ? "claro" : "escuro";
     },
   },
 });
 </script>
-
 <style scoped>
-.image {
-  margin-bottom: 1rem;
+h1 {
+  text-align: center;
+}
+strong {
+  color: #f95738;
+}
+header {
+  background: #0d3b66;
+  width: 100%;
+  height: 100vh;
+  padding: 2rem;
 }
 
 .button {
   background: #fcba03;
-  color: #5c5a5a;
+  color: #222;
   font-weight: bold;
   border: none;
   margin-bottom: 1rem;
 }
 
-header {
-  padding: 1rem;
-  background: #222;
-  width: 100%;
-  height: 100vh;
-}
 .author {
   color: #fff;
   font-size: 1rem;
-  margin-top: 1rem;
+  margin: 8px 0;
   border: 1px solid #fff;
   border-radius: 5px;
   text-align: center;
 }
+
 @media only screen and (max-width: 768px) {
   header {
-    padding: 2.5rem;
     height: auto;
   }
 }
-
 .panel li {
   margin: 8px 0;
 }
