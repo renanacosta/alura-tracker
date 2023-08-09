@@ -2,11 +2,11 @@
   "projetos": [
     {
       "id": 1,
-      "nome": "Alura Tracker 3"
+      "nome": ""
     },
     {
-      "nome": "Plano de estudos JS",
-      "id": 2
+      "id": 2,
+      "nome": "Plano de estudos"
     },
     {
       "nome": "Estudar Vue",
@@ -29,12 +29,17 @@
     },
     {
       "duracaoEmSegundos": 3,
-      "descricao": "Refatoração do Vuex",
+      "descricao": "Refatoração do Vuex 6",
       "projeto": {
         "id": 1,
         "nome": "Alura Tracker 3"
       },
       "id": 2
+    },
+    {
+      "duracaoEmSegundos": 1,
+      "descricao": "dddddd",
+      "id": 3
     }
   ]
 }

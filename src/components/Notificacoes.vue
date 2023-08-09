@@ -21,14 +21,14 @@ import { TipoNotificacao } from "@/interfaces/INotificacao";
 
 export default defineComponent({
   name: "Notificacoes",
-  data() {
+  data () {
     return {
       contexto: {
-        [TipoNotificacao.SUCESSO]: "is-success",
-        [TipoNotificacao.ATENCAO]: "is-warning",
-        [TipoNotificacao.FALHA]: "is-danger",
-      },
-    };
+        [TipoNotificacao.SUCESSO]: 'is-success',
+        [TipoNotificacao.ATENCAO]: 'is-warning',
+        [TipoNotificacao.FALHA]: 'is-danger',
+      }
+    }
   },
   setup() {
     const store = useStore();

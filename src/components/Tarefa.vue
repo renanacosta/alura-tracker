@@ -22,7 +22,7 @@ import ITarefa from "../interfaces/ITarefa";
 
 export default defineComponent({
   name: 'Tarefa',
-  emits: ['aoTarefa-clicada'],
+  emits: ['aoTarefaClicada'],
   components: {
     Cronometro,
     Box
@@ -35,7 +35,7 @@ export default defineComponent({
   },
   methods: {
     tarefaClicada () : void {
-      this.$emit('aoTarefa-clicada', this.tarefa)
+      this.$emit('aoTarefaClicada', this.tarefa)
     }
   },
   computed: {
@@ -47,7 +47,6 @@ export default defineComponent({
   }
 });
 </script>
-
 <style scoped>
 .clicavel {
   cursor: pointer;

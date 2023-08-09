@@ -9,7 +9,7 @@
       v-for="(tarefa, index) in tarefas"
       :tarefa="tarefa"
       :key="index"
-      @aoTarefa-clicada="selecionarTarefa"
+      @aoTarefaClicada="selecionarTarefa"
     />
     <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
       <div class="modal-background"></div>
@@ -24,7 +24,9 @@
         </header>
         <section class="modal-card-body">
           <div class="field">
-            <label for="descricaoDaTarefa" class="label"> Descrição </label>
+            <label for="descricaoDaTarefa" class="label">
+              Descrição
+            </label>
             <input
               type="text"
               class="input"
@@ -34,7 +36,7 @@
           </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Salvar alterações</button>
+          <button @click="alterarTarefa" class="button is-success">Salvar alterações</button>
           <button @click="fecharModal" class="button">Cancelar</button>
         </footer>
       </div>
@@ -49,6 +51,7 @@ import Tarefa from "../components/Tarefa.vue";
 import Box from "../components/Box.vue";
 import { useStore } from "@/store";
 import {
+  ALTERAR_TAREFA,
   CADASTRAR_TAREFA,
   OBTER_PROJETOS,
   OBTER_TAREFAS,
@@ -77,6 +80,10 @@ export default defineComponent({
     fecharModal() {
       this.tarefaSelecionada = null;
     },
+    alterarTarefa () {
+      this.store.dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
+        .then(() => this.fecharModal())
+    }
   },
   computed: {
     semTarefas(): boolean {
@@ -88,7 +95,7 @@ export default defineComponent({
     store.dispatch(OBTER_TAREFAS);
     store.dispatch(OBTER_PROJETOS);
     return {
-      tarefas: computed(() => store.state.tarefas),
+      tarefas: computed(() => store.state.tarefa.tarefas),
       store,
     };
   },
