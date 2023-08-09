@@ -5,20 +5,37 @@
       Você não está muito produtivo hoje
       <span class="has-text-weight-bold">:(</span>
     </Box>
-    <Tarefa v-for="(tarefa, index) in tarefas" :tarefa="tarefa" :key="index" />
-    <div class="modal">
+    <Tarefa
+      v-for="(tarefa, index) in tarefas"
+      :tarefa="tarefa"
+      :key="index"
+      @aoTarefa-clicada="selecionarTarefa"
+    />
+    <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Modal title</p>
-          <button class="delete" aria-label="close"></button>
+          <p class="modal-card-title">Editando uma tarefa</p>
+          <button
+            @click="fecharModal"
+            class="delete"
+            aria-label="close"
+          ></button>
         </header>
         <section class="modal-card-body">
-          <!-- Content ... -->
+          <div class="field">
+            <label for="descricaoDaTarefa" class="label"> Descrição </label>
+            <input
+              type="text"
+              class="input"
+              v-model="tarefaSelecionada.descricao"
+              id="descricaoDaTarefa"
+            />
+          </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Save changes</button>
-          <button class="button">Cancel</button>
+          <button class="button is-success">Salvar alterações</button>
+          <button @click="fecharModal" class="button">Cancelar</button>
         </footer>
       </div>
     </div>
@@ -45,9 +62,20 @@ export default defineComponent({
     Tarefa,
     Box,
   },
+  data() {
+    return {
+      tarefaSelecionada: null as ITarefa | null,
+    };
+  },
   methods: {
     salvarTarefa(tarefa: ITarefa): void {
       this.store.dispatch(CADASTRAR_TAREFA, tarefa);
+    },
+    selecionarTarefa(tarefa: ITarefa) {
+      this.tarefaSelecionada = tarefa;
+    },
+    fecharModal() {
+      this.tarefaSelecionada = null;
     },
   },
   computed: {
